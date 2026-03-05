@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>གསེར་ལྡན་ནང་བསྟན་ཚིག་མཛོད། 色鼎佛教词典 Serden Dharma Dictionary</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="ui.js"></script>
+		<script src="search.js"></script>
+		<script src="firebase.js"></script>
+		<script src="connectdatabase.js"></script>
+		<script src="transtabletojson.js"></script>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+	<div id="wrapper">
+		<header class="app-header">
+			<h1 class="app-title">གསེར་ལྡན་ནང་བསྟན་ཚིག་མཛོད། 色鼎佛教词典</h1>
+			<span class="app-subtitle">Serden Dharma Dictionary</span>
+			<div class="header-actions">
+				<button class="btn btn-ghost" onClick="newEntry()">གསར་སྒྲིག 新建</button>
+				<button class="btn btn-ghost" onClick='edit()'>རྩོམ་སྒྲིག 編輯</button>
+			</div>
+		</header>
+
+		<div class="app-body">
+		<aside class="sidebar">
+			<section class="search-section">
+				<div class="search-field">
+					<label class="search-label">ཚིག་འཇུག 辭條</label>
+					<input id="entryinput" onInput="doentrySearch(this.value)" type="search" name="q" placeholder="བོད་ཡིག་ཡང་ན་རྒྱ་ཡིག་འཇུག་པ། 輸入藏文或中文…" autocomplete="off"/>
+				</div>
+				<div class="search-field">
+					<label class="search-label">མིང་ཐུང་། 略語</label>
+					<input id="abbinput" onInput="doabbSearch(this.value)" type="search" name="q" placeholder="མིང་ཐུང་འཚོལ་བཤེར། 輸入略語查詢…" autocomplete="off"/>
+				</div>
+			</section>
+
+			<div id="entrylist" class="entry-list">
+				<ul id="display1" class="search-results"></ul>
+			</div>
+		</aside>
+
+		<main id="display2" class="entrydetails"></main>
+		</div>
+	</div>
+	<script>
+	var checkterms=function(){
+		if(terms==undefined){
+			setTimeout(function(){
+				return checkterms();
+			},500);
+		}else{
+			document.getElementById("display1").innerHTML="<p class='loading-done'><span class='check-icon'>✓</span> འཇུག་འགྲུབ། 載入完成</p>";
+		}
+	}
+	document.getElementById("display1").innerHTML="<p class='loading'><span class='spinner'></span> ཚིག་མཛོད་འཇུག་བཞིན། 載入辭典中…</p>";
+	checkterms();
+	</script>
+	</body>
+</html>
